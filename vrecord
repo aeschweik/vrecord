@@ -31,7 +31,7 @@ FFPLAY_DECKLINK=("${BREW_PREFIX}/bin/ffplay-dl")
 MPVOPTS=(--no-osc)
 MPVOPTS+=(--load-scripts=no)
 MPVOPTS+=(--script "${SCRIPTDIR}/qcview.lua")
-MPVOPTS+=(--really-quiet)
+#MPVOPTS+=(--really-quiet)
 
 if [[ "$("${FFMPEG_DECKLINK[@]}" -version 2>&1 | grep "Library not loaded" >/dev/null)" || ! -f "${FFMPEG_DECKLINK}" || ! -f "${FFPLAY_DECKLINK}" ]] ; then
     echo "Please reinstall 'ffmpeg-dl':"
@@ -1141,6 +1141,7 @@ PIPE_DECKLINK=(-c copy)
 PIPE_DECKLINK+=(-f nut)
 PIPE_DECKLINK+=(-)
 WINDOW_NAME="mode:${RUNTYPE} - video:'${VIDEO_INPUT_CHOICE}' audio:'${AUDIO_INPUT_CHOICE}' - to end recording press q, esc, or close video window"
+MPVOPTS+=(--script-opts=qcview-pixelformat="${PIXEL_FORMAT}")
 
 # CLI passthrough and audiopassthrough modes
 if [[ "${RUNTYPE}" = "passthrough" ]] ; then
